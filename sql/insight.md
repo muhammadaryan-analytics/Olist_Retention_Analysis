@@ -11,4 +11,6 @@ SELECT
 FROM summary
 GROUP BY EXTRACT(YEAR FROM cohort_month)
 ORDER BY cohort_year;
-```  
+```
+<img width="462" height="114" alt="Screenshot 2025-11-29 at 3 59 35 PM" src="https://github.com/user-attachments/assets/91c17497-d8d7-4d2c-b22e-fd0b1ddf05db" />
+

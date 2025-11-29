@@ -87,6 +87,6 @@ JOIN order_items oi ON o.order_id = oi.order_id
 JOIN products p ON oi.product_id = p.product_id
 JOIN sellers s ON oi.seller_id = s.seller_id
 LEFT JOIN order_reviews r ON o.order_id = r.order_id;
-```sql
+```
 
 

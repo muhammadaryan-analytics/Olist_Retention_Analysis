@@ -1,48 +1,57 @@
-# Olist_Retention_Analysis
-
-## Project Overview
-This project diagnoses the root cause of the $68\%$ first-time customer churn at Olist, isolating the key drivers to provide a strategic, constraint-aware recommendation. The solution targets an estimated $3.6 Million Annual GMV opportunity.
-
-## The Problem Statement
-The Crisis: 
-Olist is facing an unsustainable $68\%$ first-purchase churn rate.
-
-The Objective: 
-Determine if the failure is Operational (fixable problems like late delivery) or Structural (intrinsic product mix issues).
-
-The Constraint: 
-The analysis respects the critical limitation that Olist cannot control logistics/delivery carriers.
-
-## Analytical Findings: Structural Dominance is the Proof
-The Logistic Regression model isolated the causal effects of each factor, proving the solution lies in the product mix.
-
-The Damage (Operational Factors):
-Late Delivery (is_late): This factor has an Odds Ratio ($\text{OR}$) of $3.09$. This means a late delivery triples the odds of a customer churning (a $209\%$ increase).
-
-Review Score Paradox: A one-point increase in review score slightly increases churn odds ($\text{OR} = 1.49$), suggesting that high expectations in certain categories are quickly penalized if not met.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a58347ae-6a9d-4065-a757-b3d89b92c97d"  width="300"  alt="olistlogo">
+</p>
 
 
-The Fix (Structural Factors):
-The Best Categories (Computers): This category has an $\text{OR}$ of $0.248$. This means belonging to this category reduces the odds of churn by $75.2\%$ (relative to the baseline category).
+
+## Introduction
+
+### **Who is Olist?**
+
+Olist is a Brazilian e-commerce platform that connects small and medium-sized sellers to large online marketplaces, enabling them to sell their products across Brazil. It provides tools for order management, logistics, payments, and customer support, helping sellers reach more customers and scale their online business.
+
+### **Project Goal**
+
+**Olist Marketplace:** Why First-Time Buyers Don't Come Back. **(96.9%)** of customers never make a second purchase.
 
 
-The Conclusion (The Comparison):
-The positive impact of the Structural Fix (the $75.2\%$ churn reduction) is $\sim 24\times$ greater than the negative impact of the worst operational damage (the $209\%$ increase from late delivery). The strategic focus must be on fixing the category mix.
+**The core question:** Are customers leaving because of Olist's operational problems, or is this just how Brazilian
+e-commerce works?   
+**If it's operational,** you need to:
+1. Isolate the biggest controllable factor (delivery issues, seller quality, product problems)     
+2. Prove it's actually causing churn, not just correlated with it     
+3. Estimate what fixing it would be worth
+            
+**If it's structural** (people only buy certain categories once, trust issues with online shopping), you need to say that clearly so they stop trying to fix retention and focus on acquisition efficiency instead.
 
 
-## Final Recommendation & Business Impact
-### Recommendation:
 
-Immediate shift in Seller Recruitment Strategy to aggressively target high-retention categories.
+### **Data Source**
+**Kaggle** - Brazilian E-Commerce Public Dataset by Olist  
+[View Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce?resource=download)
 
-Focus Areas: 
-Direct resources toward acquiring sellers in top-retaining categories like Computers, Health/Beauty, and Furniture Decor.
 
-De-prioritize: 
-Stop actively onboarding sellers in high-churn, low-repeat categories (e.g., Music, Art).
 
-Quantified Value:
-By raising the customer repeat rate from $32\%$ to a conservative $45\%$, this strategy unlocks $3.6 Million in additional Gross Merchandise Volume (GMV) annually.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

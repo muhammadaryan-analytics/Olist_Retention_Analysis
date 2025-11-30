@@ -1,4 +1,4 @@
-### First Step: Validate the Core Problem
+## Step 1: Validate the Core Problem
 - Before diagnose anything, confirm the retention problem is real and worth solving.
 ```sql
 -- Cohort analysis by first purchase year
@@ -14,29 +14,18 @@ ORDER BY cohort_year;
 ```
 Here is the output of the query:
 
+<img width="550" height="150" alt="Screenshot 2025-11-29 at 3 59 35 PM" src="https://github.com/user-attachments/assets/91c17497-d8d7-4d2c-b22e-fd0b1ddf05db" />
+
 - **93,102** out of **96,099** customers **(96.9%)** made exactly one purchase. That's the core problem.
 - **3.1% repeat rate.**
 
-<img width="550" height="150" alt="Screenshot 2025-11-29 at 3 59 35 PM" src="https://github.com/user-attachments/assets/91c17497-d8d7-4d2c-b22e-fd0b1ddf05db" />
 
-### Step 2: Test the Delivery Hypothesis
-- The brief assumes delivery performance is the main driver.
-```sql
--- Compare late delivery rates between one-time vs repeat customers
-SELECT 
-    CASE WHEN is_repeat_customer = 1 THEN 'Repeat Customer' ELSE 'One-Time Customer' END as customer_type,
-    COUNT(*) as total_orders,
-    SUM(CASE WHEN is_late = 1 THEN 1 ELSE 0 END) as late_orders,
-    ROUND(100.0 * SUM(CASE WHEN is_late = 1 THEN 1 ELSE 0 END) / COUNT(*), 2) as late_rate_pct,
-    ROUND(AVG(delivery_time_days), 2) as avg_delivery_days,
-    ROUND(AVG(shipping_delay), 2) as avg_delay_days
-FROM summary
-WHERE order_status = 'delivered'
-GROUP BY CASE WHEN is_repeat_customer = 1 THEN 'Repeat Customer' ELSE 'One-Time Customer' END;
-```
-Here is the output of the query:
+## Step 2: Test the Delivery Hypothesis
+The brief assumes delivery performance is the main driver.
+- Do repeat customers have better first-order delivery experiences?
+- Do customers with late first deliveries return at lower rates?
+- Do customers with bad first-order reviews return at lower rates?
 
-<img width="641" height="500" alt="Screenshot 2025-11-30 at 11 36 19 AM" src="https://github.com/user-attachments/assets/95476a07-9cf4-435a-acae-2465532bbc11" />
 
 
 
@@ -64,7 +53,11 @@ Here is the output of the query:
 
 <img width="517" height="94" alt="Screenshot 2025-11-30 at 11 47 39 AM" src="https://github.com/user-attachments/assets/c5260957-918e-4cd8-b191-b5b9f1a22039" />
 
+**Delivery performance barely matters:**
 
+- Late delivery: 2.57% return rate
+- On-time delivery: 3.24% return rate
+- Difference: 0.67 percentage points
 
 ```sql
 -- Does review score on first order predict return?
@@ -98,6 +91,16 @@ Here is the output of the query:
 
 <img width="489" height="121" alt="Screenshot 2025-11-30 at 11 50 11 AM" src="https://github.com/user-attachments/assets/f66f5508-aed9-4c96-af40-0c36d02df66b" />
 
+
+**Review scores don't matter at all:**
+
+- Negative (1-2 stars): 3.10% return
+- Neutral (3 stars): 3.18% return
+- Positive (4-5 stars): 3.18% return
+
+Even customers who had perfect experiences (on-time delivery, 5-star reviews) still only come back 3.2% of the time. That's the same rate as customers who had terrible experiences.
+This tells you the problem is NOT operational.
+It's not delivery speed. It's not seller quality. It's not product issues. Those things barely move the needle.
 
 
 
